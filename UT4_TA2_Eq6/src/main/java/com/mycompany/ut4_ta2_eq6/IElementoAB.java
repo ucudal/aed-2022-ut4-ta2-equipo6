@@ -1,3 +1,5 @@
+package com.mycompany.ut4_ta2_eq6;
+
 public interface IElementoAB<T> {
 
     /**
