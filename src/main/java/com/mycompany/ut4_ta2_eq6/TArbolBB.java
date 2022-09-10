@@ -79,7 +79,12 @@ public class TArbolBB<T> implements IArbolBB<T> {
 
     @Override
     public void eliminar(Comparable unaEtiqueta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (raiz != null){
+            raiz = raiz.eliminar(unaEtiqueta);
+        }
+        else {
+            System.out.println("Arbol vacio");
+        }
     }
 
     public boolean esVacio() {

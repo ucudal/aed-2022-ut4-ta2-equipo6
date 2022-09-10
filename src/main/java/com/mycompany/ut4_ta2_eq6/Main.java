@@ -13,7 +13,9 @@ public class Main {
     public static void main(String[] args) {
         TArbolBB<Integer> arbol = new TArbolBB<>();
 
-        // Parte A
+        /*
+        Ejercicio 1 - Subequipo A
+         */
         String[] claves = ManejadorArchivosGenerico.leerArchivo("src\\claves1.txt");
         String[] clavesInsertadas = new String[claves.length];
         int[] contadorInserciones = {0};
@@ -31,7 +33,9 @@ public class Main {
         System.out.println("Preorden: " + arbol.preOrden());
 
 
-        // Parte B
+        /*
+        Ejercicio 1 - Subequipo B
+         */
         String[] consultas = ManejadorArchivosGenerico.leerArchivo("src\\consultaPrueba.txt");
         String[] clavesBuscadas = new String[consultas.length];
         int[] contadorBusquedas = {0};
@@ -47,5 +51,34 @@ public class Main {
         ManejadorArchivosGenerico.escribirArchivo("src\\clavesBuscadas.txt", clavesBuscadas);
         System.out.println("Inorden: " + arbol.inOrden());
         System.out.println("Postorden: " + arbol.postOrden());
+
+
+        /*
+        Ejercicio 2
+         */
+        TArbolBB<Integer> arbol2 = new TArbolBB<>();
+        int[] clavesParaInsertar = {12, 25, 14, 1, 33, 88, 45, 2, 7, 66, 5, 99};
+        for (int j : clavesParaInsertar) {
+            TElementoAB<Integer> nuevaClave = new TElementoAB<>(j, null);
+            arbol2.insertar(nuevaClave);
+        }
+
+        // Imprimimos preorden, inorden y postorden.
+        System.out.println("\n");
+        System.out.println("Preorden: " + arbol2.preOrden());
+        System.out.println("Inorden: " + arbol2.inOrden());
+        System.out.println("Postorden: " + arbol2.postOrden());
+
+        // Eliminamos las claves como en el ejercicio de clase.
+        arbol2.eliminar(99);
+        arbol2.eliminar(2);
+        arbol2.eliminar(12);
+        arbol2.eliminar(33);
+
+        // Volvemos a imprimir el preorden, inorden y postorden.
+        System.out.println("\n");
+        System.out.println("Preorden: " + arbol2.preOrden());
+        System.out.println("Inorden: " + arbol2.inOrden());
+        System.out.println("Postorden: " + arbol2.postOrden());
     }
 }

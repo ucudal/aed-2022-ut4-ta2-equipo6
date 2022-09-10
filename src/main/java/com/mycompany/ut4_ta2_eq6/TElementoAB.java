@@ -152,7 +152,6 @@ public class TElementoAB<T> implements IElementoAB<T> {
             resultado.append(TArbolBB.SEPARADOR_ELEMENTOS_IMPRESOS);
             resultado.append(getHijoDer().inOrden());
         }
-
         return resultado.toString();
     }
 
@@ -177,8 +176,44 @@ public class TElementoAB<T> implements IElementoAB<T> {
     }
 
     @Override
-    public TElementoAB eliminar(Comparable unaEtiqueta) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public TElementoAB<T> eliminar(Comparable unaEtiqueta) {
+        if (unaEtiqueta.compareTo(this.getEtiqueta()) < 0) {
+            if (this.hijoIzq != null) {
+                this.hijoIzq = hijoIzq.eliminar(unaEtiqueta);
+            }
+            return this;
+        }
+        if (unaEtiqueta.compareTo(this.getEtiqueta()) > 0) {
+            if (this.hijoDer != null) {
+                this.hijoDer = hijoDer.eliminar(unaEtiqueta);
+            }
+            return this;
+        }
+        return quitarNodo();
+    }
+
+    private TElementoAB<T> quitarNodo() {
+        if (hijoIzq == null) {
+            return hijoDer;
+        }
+        if (hijoDer == null) {
+            return hijoIzq;
+        }
+
+        TElementoAB<T> elHijo = hijoIzq;
+        TElementoAB<T> elPadre = this;
+        while (elHijo.getHijoDer() != null) {
+            elPadre = elHijo;
+            elHijo = elHijo.getHijoDer();
+        }
+        if (elPadre != this) {
+            elPadre.setHijoDer(elHijo.getHijoIzq());
+            elHijo.setHijoIzq(hijoIzq);
+        }
+        elHijo.setHijoDer(hijoDer);
+        setHijoIzq(null);  // para que no queden referencias y ayudar al collector
+        setHijoDer(null);
+        return elHijo;
     }
 
    	
